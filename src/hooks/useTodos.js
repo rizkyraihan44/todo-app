@@ -1,11 +1,26 @@
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import {
+    generateRandomId,
+    getFilteredTodoList,
+    saveData,
+} from '../utils/todoUtils';
 const useTodos = () => {
     const [todos, setTodos] = useState([]);
 
+    useEffect(() => {
+        const db = JSON.parse(localStorage?.getItem('todo-app') ?? '{}');
+        if (db.todos) {
+            setTodos(db.todos);
+        }
+    }, []);
+
     function addTodo(newTodo) {
-        const newTodoList = [...todos, { input: newTodo, complete: false }];
+        const newTodoList = [
+            ...todos,
+            { id: generateRandomId(16), input: newTodo, complete: false },
+        ];
         setTodos(newTodoList);
+        saveData(newTodoList);
     }
 
     function completeTodo(index) {
@@ -14,6 +29,7 @@ const useTodos = () => {
         completeTodo.complete = !completeTodo.complete;
         newTodoList[index] = completeTodo;
         setTodos(newTodoList);
+        saveData(newTodoList);
     }
 
     function deleteTodo(index) {
@@ -21,16 +37,7 @@ const useTodos = () => {
             return valIndex !== index;
         });
         setTodos(newTodoList);
-    }
-
-    function getFilteredTodoList(selectedTab) {
-        if (selectedTab === 'Open') {
-            return todos.filter((todo) => !todo.complete);
-        } else if (selectedTab === 'complete') {
-            return todos.filter((todo) => todo.complete);
-        } else {
-            return todos;
-        }
+        saveData(newTodoList);
     }
 
     return {
@@ -38,7 +45,8 @@ const useTodos = () => {
         addTodo,
         completeTodo,
         deleteTodo,
-        getFilteredTodoList,
+        getFilteredTodoList: (selectedTab) =>
+            getFilteredTodoList(todos, selectedTab),
     };
 };
 
