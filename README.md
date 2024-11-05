@@ -1,8 +1,33 @@
-# React + Vite
+# Todo App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Deskripsi
 
-Currently, two official plugins are available:
+Todo App adalah aplikasi sederhana untuk mengelola daftar tugas (todo). Pengguna dapat menambah, menghapus, dan menandai tugas sebagai selesai. Aplikasi ini menggunakan React untuk frontend dan menyimpan data di Local Storage.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Struktur folder
+
+    src
+    ┣ assets
+    ┃ ┗ react.svg
+    ┣ components
+    ┃ ┣ Header.jsx
+    ┃ ┣ Tabs.jsx
+    ┃ ┣ TodoCard.jsx
+    ┃ ┣ TodoInput.jsx
+    ┃ ┗ TodoList.jsx
+    ┣ hooks
+    ┃ ┗ useTodos.js
+    ┣ utils
+    ┃ ┗ todoUtils.js
+    ┣ App.css
+    ┣ App.jsx
+    ┣ fanta.css
+    ┣ index.css
+    ┗ main.jsx
+
+## Fitur
+
+-   Menambah tugas baru
+-   Menandai tugas sebagai selesai
+-   Menghapus tugas
+-   Menampilkan tugas berdasarkan status (semua, terbuka, selesai)
